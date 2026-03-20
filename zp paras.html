@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ZP Paras FF - FINAL GOD++</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    color: white;
+    text-align: center;
+    background: black;
+    overflow-x: hidden;
+}
+
+/* LOADING SCREEN */
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    color: red;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* HIDE MAIN CONTENT INITIALLY */
+#mainContent {
+    display: none;
+}
+
+/* HEADER */
+.header {
+    font-size: 45px;
+    padding: 20px;
+    color: yellow;
+    text-shadow: 0 0 20px red, 0 0 40px purple;
+}
+
+/* CARD */
+.card {
+    background: rgba(0,0,0,0.9);
+    border: 2px solid red;
+    border-radius: 15px;
+    margin: 20px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 0 20px red, 0 0 40px orange;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover { transform: scale(1.05); }
+
+/* BUTTON */
+.btn {
+    padding: 10px 20px;
+    background: linear-gradient(red, yellow);
+    border: none;
+    color: black;
+    margin-top: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* STATUS */
+.status { color: lime; animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity:0.5; } }
+
+/* XP BAR */
+.xp { width: 100%; height: 10px; background: #333; border-radius: 10px; margin-top:10px;}
+.xp-fill { width: 0%; height: 100%; background: linear-gradient(red,yellow); border-radius:10px; transition: width 2s; }
+
+/* RESULT */
+.result { margin-top: 20px; color: yellow; }
+
+/* PARTICLES */
+.particle {
+    position: fixed;
+    width: 6px; height: 6px;
+    background:green;
+    border-radius: 50%;
+    animation: float 3s linear infinite;
+}
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔊 SOUND -->
+<audio id="clickSound">
+<source src="https://www.soundjay.com/buttons/sounds/button-3.mp3">
+</audio>
+
+<!-- LOADING SCREEN -->
+<div id="loading">🎮 MATCHMAKING...</div>
+
+<!-- MAIN CONTENT -->
+<div id="mainContent">
+
+<div class="header">🔥 ZP PARAS FF 🔥</div>
+
+<!-- PLAYER CARD -->
+<div class="card">
+<h2>Hello guys I am Paras 👋</h2>
+<p class="status">🟢 ONLINE</p>
+<p>🏆 Rank: Heroic</p>
+<p><b>UID: 7431012984</b></p>
+<div class="xp"><div class="xp-fill" id="xpBar"></div></div>
+<button class="btn" onclick="startBattle()">ENTER BATTLE</button>
+<p id="battleMsg" class="result"></p>
+</div>
+
+<!-- REQUEST CARD -->
+<div class="card">
+<h2>📩 Send Request</h2>
+<p><b>Send request on this UID bahi log : 7431012984</b></p>
+<button class="btn" onclick="showUID()">SEND REQUEST</button>
+<p id="reqMsg" class="result"></p>
+</div>
+
+<!-- CHANNEL PROMOTION -->
+<div class="card">
+<h2>🎥 Official Channel</h2>
+<p><b>ZP Paras FF 🔥</b></p>
+<p>Hello guys I am Paras, a zone pusher in Free Fire 🔥 <br>Support me by subscribing my channel ❤️</p>
+<div style="height:150px; background: linear-gradient(red, black); border-radius:10px; box-shadow:0 0 20px red; display:flex; align-items:center; justify-content:center; font-size:20px;">▶ ZP PARAS FF</div>
+<button class="btn" onclick="openYT()">📺 WATCH CHANNEL</button>
+</div>
+
+<!-- CREDITS -->
+<div class="card">
+<h2>Credits</h2>
+<p><b>Akash Tiwari 👑🔥</b></p>
+</div>
+
+<!-- THANKS -->
+<div class="card">
+<h2>🙏 Thanks for Visiting</h2>
+<p>See you in battlefield 🔥</p>
+</div>
+
+</div> <!-- END MAIN CONTENT -->
+
+<script>
+/* SHOW MAIN CONTENT AFTER 1 SECOND */
+window.onload = function() {
+    setTimeout(()=>{
+        document.getElementById("loading").style.display="none";
+        document.getElementById("mainContent").style.display="block";
+
+        /* START XP ANIMATION */
+        document.getElementById("xpBar").style.width="80%";
+    }, 1000);
+}
+
+/* SOUND */
+function playSound(){ document.getElementById("clickSound").playqq(); }
+
+/* ENTER BATTLE */
+function startBattle(){
+    playSound();
+    document.getElementById("battleMsg").innerText = "UID: 7431012984";
+    flashScreen();
+}
+
+/* REQUEST */
+function showUID(){
+    playSound();
+    document.getElementById("reqMsg").innerText = "UID: 7431012984";
+    burstParticles();
+}
+
+/* FLASH EFFECT */
+function flashScreen(){
+    document.body.style.background = "white";
+    setTimeout(()=>{ document.body.style.background = "black"; },100);
+}
+
+/* PARTICLE BURST */
+function burstParticles(){
+    for(let i=0;i<20;i++){
+        let p=document.createElement("div");
+        p.className="particle";
+        p.style.left=Math.random()*100+"vw";
+        document.body.appendChild(p);
+        setTimeout(()=>p.remove(),3000);
+    }
+}
+
+/* CHANNEL BUTTON */
+function openYT(){ window.open("https://youtube.com/@zpparasff","_blank"); }
+
+/* FLOATING PARTICLES */
+setInterval(()=>{
+    let p=document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"vw";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),5000);
+},300);
+</script>
+
+</body>
+</html>
